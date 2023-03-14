@@ -1,0 +1,49 @@
+﻿@model List<ProductViewModel>
+
+@if (TempData["status"] is not null)
+{
+    <div class=" alert alert-primary" role="alert">
+        @TempData["status"]
+    </div>
+}
+
+<h1>Ürünler</h1>
+<a asp-controller="products" asp-action="add">Ürün Ekle</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>İsim</th>
+            <th>Açıklama</th>
+            <th>Fiyat</th>
+            <th>Stok</th>
+            <th>Renk</th>
+            <th>Aktif Mi</th>
+            <th>Yayındaki Süre</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@((item.Description is not null) ? (item.Description.Length > 10 ? item.Description.Substring(0, 10) + "..." : item.Description) : null)</td>
+                <td>@item.Price</td>
+                <td>@item.Stock</td>
+                <td>@item.Color</td>
+                <td>@item.IsActive</td>
+                <td>@item.Expire</td>
+                <td>
+                    <a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Sil</a>
+                    <a asp-controller="products" asp-action="update" asp-route-id="@item.Id">Güncelle</a>
+                    <a asp-controller="products" asp-action="GetById" asp-route-id="@item.Id">Detaylar</a>
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,60 @@
+﻿@using static MyAspNetCoreApp.Web.Controllers.OrnekController
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ornek Controller, Index sayfası</h1>
+@*
+@{
+    var name = ViewBag.name;
+    <p>@name</p>
+}
+
+<p>@name</p>
+
+<p>@ViewBag.name</p>
+
+<hr />
+<p>Yaş : @ViewData["age"]</p>
+
+<h1>Isimler</h1>
+
+@foreach (var item in ViewData["names"] as List<string>)
+{
+    <p>@item</p>
+}
+
+<p>@ViewBag.person.Id - @ViewBag.person.name - @ViewBag.person.age</p>*@
+
+@*<p>@ViewBag.name</p>*@
+@*
+@model List<Product>;
+
+@foreach (var item in Model)
+{
+    <p>@item.Id - @item.Name</p>
+}*@
+
+<div>Günün tarihi: @DateTime.Now.ToShortDateString() </div>
+
+@{
+    var dateTime = DateTime.Now.ToShortDateString();
+    var message = "Merhaba";
+    @: Bugünün tarihi: @dateTime
+    <div>Mesaj: @message</div>
+}
+
+@*@Datetime.Now*@
+
+
+@{
+    var datetime = DateTime.Now;
+}
+
+
+@*@{
+    { DateTime.Now};
+}
+*@
+
+

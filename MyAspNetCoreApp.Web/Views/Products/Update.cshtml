@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Update";
+}
+@model ProductUpdateViewModel
+
+<h1>Ürün Güncelleme</h1>
+
+<form asp-controller="Products" asp-action="Update" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImagePath" />
+    <div class="mb-3">
+        @if (!String.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img style="width:100px height:100px" src="/Images/@(Model.ImagePath)" />
+        }
+        else
+        {
+            <img style="width:100px height:100px" src="/Images/noimage.png" />
+        }
+    </div>
+
+
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Ürün İsmi</label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Ürün Açıklaması</label>
+        <input type="textarea" asp-for="Description" class="form-control" style="height:100px" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <select asp-items="@ViewBag.Categories" asp-for="CategoryId" class="form-control"></select>
+        <option value="">Kategori Seçiniz</option>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Ürün Fiyatı</label>
+        <input type="text" asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Stock" class="form-label">Ürün Stok</label>
+        <input type="number" asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <div class="form-floating">
+            <select asp-for="Color" class="form-select" aria-label="Floating label select example">
+                <option selected>Renk Seçiniz</option>
+                <option value="Mavi">Mavi</option>
+                <option value="Beyaz">Beyaz</option>
+                <option value="Kırmızı">Kırmızı</option>
+                <option value="Siyah">Siyah</option>
+                <option value="Sarı">Sarı</option>
+                <option value="Mor">Mor</option>
+                <option value="Pembe">Pembe</option>
+            </select>
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Ürün Aktif Mi</label>
+    </div>
+
+    <div class="my-3">
+        <span class="mb-3">Ürün kaç ay satışta kalacak?</span>
+        @foreach (var item in ViewBag.Expire as Dictionary<string, int>)
+        {
+            <div class="mb-3 form-check">
+                <input asp-for="Expire" type="radio" id="@item.Key" class="form-check-input" value="@item.Value" />
+                <label asp-for="Expire" for="@item.Key" class="form-check-label">@item.Key</label>
+            </div>
+        }
+        <span asp-validation-for="Expire" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PublishDate" class="form-label">Ürün Stok</label>
+        <input asp-for="PublishDate" class="form-control" />
+        <span asp-validation-for="PublishDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Image" class="form-label">Ürün Resim</label>
+        <input asp-for="Image" class="form-control form-control-lg" type="file">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+

@@ -1,0 +1,11 @@
+﻿@model ProductListPartialViewModel
+@{
+    var product = new Product() { Id = 1, Name = "Kalem", Price = 20, Stock = 1000 };
+}
+
+
+<partial name="~/PartialViews/_ProductListPartialView.cshtml" model="Model" />
+<italic>Tunahan Kılıç</italic>
+
+<product-show product="@product"></product-show>
+
